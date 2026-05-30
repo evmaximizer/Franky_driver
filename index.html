@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franky · Personal Driver &amp; Concierge · Florence</title>
+<meta name="description" content="Franky — Personal Driver & Concierge in Florence. Private transfers and tailor-made experiences across Florence & Tuscany.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2b2117;
+    --gold:#9c7c41;
+    --gold-soft:#b89a5e;
+    --cream:#f3ecdd;
+    --paper:#faf5ea;
+    --line:rgba(156,124,65,.30);
+    --muted:#8a7a60;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{background:#1b150f;}
+  body{
+    font-family:'Jost',sans-serif;color:var(--ink);min-height:100vh;
+    display:flex;align-items:flex-start;justify-content:center;padding:22px 15px 40px;
+    background:radial-gradient(circle at 50% -5%, #312618 0%, #16110b 72%);
+  }
+
+  /* ---- Card wrapper (same language as the VIP Card) ---- */
+  .card{
+    width:100%;max-width:412px;position:relative;border-radius:5px;
+    background:linear-gradient(180deg,var(--paper) 0%, var(--cream) 100%);
+    border:1px solid var(--line);padding:40px 30px 30px;
+    box-shadow:0 32px 80px -22px rgba(0,0,0,.65);
+    animation:rise .9s cubic-bezier(.2,.7,.2,1) both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes fade{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  .card::before,.card::after{content:"";position:absolute;width:26px;height:26px;border-color:var(--gold);border-style:solid;opacity:.5;}
+  .card::before{top:13px;left:13px;border-width:1px 0 0 1px;}
+  .card::after{bottom:13px;right:13px;border-width:0 1px 1px 0;}
+
+  /* ---- Divider with diamond ---- */
+  .rule{display:flex;align-items:center;justify-content:center;gap:11px;margin:24px 0;}
+  .rule span{height:1px;width:50px;}
+  .rule span:first-child{background:linear-gradient(90deg,transparent,var(--gold));}
+  .rule span:last-child{background:linear-gradient(90deg,var(--gold),transparent);}
+  .rule .dot{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);}
+
+  /* ---- Hero ---- */
+  .hero{text-align:center;}
+  .portrait{
+    width:118px;height:118px;margin:0 auto 16px;border-radius:50%;
+    padding:4px;background:linear-gradient(145deg,var(--gold-soft),var(--gold));
+    animation:fade .9s .4s both;
+  }
+  .portrait img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 38%;display:block;border:2px solid var(--paper);}
+  .name{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600;color:var(--ink);letter-spacing:.04em;animation:fade .9s .46s both;}
+  .role{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin-top:8px;animation:fade .9s .52s both;}
+  .tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;line-height:1.5;color:#6a5c47;margin-top:14px;padding:0 4px;animation:fade .9s .58s both;}
+
+  /* ---- Section heading ---- */
+  .sect-lbl{text-align:center;font-size:9.5px;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+
+  /* ---- Experiences / branches (scalable) ---- */
+  .branches{display:flex;flex-direction:column;gap:11px;}
+  .branch{
+    display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink);
+    border:1px solid var(--line);border-radius:4px;padding:15px 16px;
+    background:rgba(255,255,255,.35);transition:background .35s,border-color .35s;
+    animation:fade .9s both;
+  }
+  .branch:active{background:var(--ink);}
+  .branch:active .b-title,.branch:active .b-desc,.branch:active .b-arrow{color:var(--cream);}
+  .branch:active .b-lbl{color:var(--gold-soft);}
+  .b-ico{flex:0 0 38px;height:38px;display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--line);border-radius:50%;color:var(--gold);}
+  .b-body{flex:1;min-width:0;}
+  .b-lbl{font-size:8.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);}
+  .b-title{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;line-height:1.1;margin-top:2px;}
+  .b-desc{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4;}
+  .b-arrow{flex:0 0 auto;color:var(--gold);font-size:18px;}
+
+  /* coming soon (predisposto, non attivo) */
+  .branch.soon{opacity:.6;cursor:default;background:transparent;border-style:dashed;}
+  .branch.soon .b-arrow{display:none;}
+  .pill-soon{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+    border:1px solid var(--line);border-radius:999px;padding:3px 8px;white-space:nowrap;}
+
+  /* ---- Reputation ---- */
+  .rep{text-align:center;}
+  .rep .msg{font-size:13px;line-height:1.7;color:#6a5c47;font-weight:300;padding:0 2px;margin-bottom:16px;}
+  .rep .msg b{font-weight:500;color:var(--ink);}
+  .rep-btns{display:flex;gap:10px;}
+  .rep-btns .act{flex:1;}
+
+  /* ---- Pill buttons (shared) ---- */
+  .act{display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;
+    color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:11px 8px;
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;transition:background .35s,color .35s;}
+  .act svg{color:var(--gold);transition:color .35s;}
+  .act:active{background:var(--ink);color:var(--cream);}
+  .act:active svg{color:var(--gold-soft);}
+
+  /* ---- Contacts ---- */
+  .phone{display:block;text-decoration:none;text-align:center;border:1px solid var(--gold);border-radius:3px;padding:14px;color:var(--ink);transition:background .35s,color .35s;margin-bottom:10px;}
+  .phone .pl{font-size:9.5px;letter-spacing:.36em;text-transform:uppercase;color:var(--gold);}
+  .phone .pn{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:600;margin-top:4px;letter-spacing:.05em;}
+  .phone:active{background:var(--ink);color:var(--cream);}
+  .phone:active .pl{color:var(--gold-soft);}
+  .contact-row{display:flex;gap:10px;}
+  .contact-row .act{flex:1;}
+
+  /* ---- Company booking block ---- */
+  .company{text-align:center;background:var(--ink);color:var(--cream);border-radius:3px;padding:20px 18px;}
+  .company .c-lbl{font-size:9px;letter-spacing:.36em;text-transform:uppercase;color:var(--gold-soft);}
+  .company .c-txt{font-size:12.5px;line-height:1.6;color:var(--cream);margin-top:9px;font-weight:300;}
+  .company .c-btn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;margin-top:14px;
+    color:var(--cream);border:1px solid var(--gold);border-radius:999px;padding:10px 20px;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;transition:background .35s,color .35s;}
+  .company .c-btn:active{background:var(--gold);color:var(--ink);}
+
+  /* ---- Tips (discreet) ---- */
+  .tips{text-align:center;margin-top:22px;}
+  .tips a{font-size:11px;letter-spacing:.05em;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .35s,border-color .35s;}
+  .tips a:active{color:var(--gold);border-color:var(--gold);}
+
+  /* ---- Foot ---- */
+  .foot{text-align:center;margin-top:24px;font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:#a4937a;}
+  .foot .it{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;letter-spacing:.04em;text-transform:none;color:#857452;margin-top:6px;}
+
+  .d1{animation-delay:.64s}.d2{animation-delay:.7s}.d3{animation-delay:.76s}
+</style>
+</head>
+<body>
+  <main class="card">
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero">
+      <div class="portrait"><img src="assets/francesco-portrait.jpg" alt="Franky — Personal Driver in Florence"></div>
+      <h1 class="name">Franky</h1>
+      <div class="role">Personal Driver &amp; Concierge · Florence</div>
+      <p class="tagline">Private transfers and tailor-made experiences<br>across Florence &amp; Tuscany.</p>
+    </section>
+
+    <div class="rule"><span></span><div class="dot"></div><span></span></div>
+
+    <!-- ===================== EXPERIENCES (rami) ===================== -->
+    <!-- Struttura scalabile: per aggiungere un'esperienza, duplica un blocco <a class="branch"> -->
+    <section>
+      <div class="sect-lbl">Experiences</div>
+      <div class="branches">
+
+        <!-- Ramo 1: Shopping → VIP Card Michelangelo (link interno) -->
+        <a class="branch d1" href="vip/">
+          <span class="b-ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </span>
+          <span class="b-body">
+            <span class="b-lbl">Shopping</span>
+            <span class="b-title">Leather Atelier</span>
+            <span class="b-desc">A private welcome at a historic Florentine leather house.</span>
+          </span>
+          <span class="b-arrow">→</span>
+        </a>
+
+        <!-- Ramo 2: Private tours → Passaggio (link esterno, PLACEHOLDER) -->
+        <a class="branch d2" href="https://PASSAGGIO-URL-PLACEHOLDER" target="_blank" rel="noopener">
+          <span class="b-ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          </span>
+          <span class="b-body">
+            <span class="b-lbl">Private tours</span>
+            <span class="b-title">Florence &amp; Tuscany</span>
+            <span class="b-desc">Curated routes and stories, at your own pace.</span>
+          </span>
+          <span class="b-arrow">→</span>
+        </a>
+
+        <!-- Ramo 3 (slot predisposto): Wine tasting San Gimignano — coming soon -->
+        <div class="branch soon d3">
+          <span class="b-ico">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 2h8l-1 7a3 3 0 0 1-6 0z"/><path d="M12 12v6"/><path d="M8 22h8"/></svg>
+          </span>
+          <span class="b-body">
+            <span class="b-lbl">Wine tasting</span>
+            <span class="b-title">San Gimignano</span>
+            <span class="b-desc">A Tuscan cellar experience.</span>
+          </span>
+          <span class="pill-soon">Coming soon</span>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="rule"><span></span><div class="dot"></div><span></span></div>
+
+    <!-- ===================== REPUTATION ===================== -->
+    <section class="rep">
+      <div class="sect-lbl">A kind word</div>
+      <p class="msg">If your day with me was special, the nicest thing you can do is <b>share it</b> — and remember to <b>ask for Franky</b> next time you are in Florence.</p>
+      <div class="rep-btns">
+        <!-- PLACEHOLDER: incollare il link recensioni Google -->
+        <a class="act" href="https://GOOGLE-REVIEWS-PLACEHOLDER" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9"/></svg>
+          <span>Google</span>
+        </a>
+        <!-- PLACEHOLDER: incollare il link TripAdvisor -->
+        <a class="act" href="https://TRIPADVISOR-PLACEHOLDER" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9"/></svg>
+          <span>TripAdvisor</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="rule"><span></span><div class="dot"></div><span></span></div>
+
+    <!-- ===================== CONTACTS ===================== -->
+    <section>
+      <div class="sect-lbl">Say hello</div>
+      <a class="phone" href="tel:+393917984633">
+        <div class="pl">Direct line</div>
+        <div class="pn">+39 391 798 4633</div>
+      </a>
+      <div class="contact-row">
+        <a class="act" href="https://wa.me/393917984633" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.38 8.38 0 0 1-4-1L3 21l1.5-5.5a8.38 8.38 0 0 1-1-4A8.38 8.38 0 0 1 11.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </section>
+
+    <div class="rule"><span></span><div class="dot"></div><span></span></div>
+
+    <!-- ===================== COMPANY BOOKING (no direct selling) ===================== -->
+    <section class="company">
+      <div class="c-lbl">Bookings</div>
+      <p class="c-txt">Rides and tours are arranged through the company I drive for. For any request, please contact them directly.</p>
+      <a class="c-btn" href="https://www.fastlivorno.com/" target="_blank" rel="noopener">
+        <span>Contact the company</span>
+      </a>
+      <!-- PLACEHOLDER: contatto diretto fornito dal capo (tel / email / link). Rimuovere se non necessario. -->
+    </section>
+
+    <!-- ===================== TIPS (discreet) ===================== -->
+    <div class="tips">
+      <!-- PLACEHOLDER: sostituire con il proprio link PayPal.me -->
+      <a href="https://paypal.me/PLACEHOLDER" target="_blank" rel="noopener">Enjoyed the ride? You can leave a tip</a>
+    </div>
+
+    <!-- ===================== FOOT ===================== -->
+    <div class="foot">
+      Florence · Tuscany
+      <div class="it">Benvenuti — Welcome to Florence</div>
+    </div>
+
+  </main>
+</body>
+</html>
