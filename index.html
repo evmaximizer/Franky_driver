@@ -130,6 +130,31 @@
   .foot .it{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;letter-spacing:.04em;text-transform:none;color:#857452;margin-top:6px;}
 
   .d1{animation-delay:.64s}.d2{animation-delay:.7s}.d3{animation-delay:.76s}
+
+  /* ---- Scan section (QR launcher) ---- */
+  .scan-row{display:flex;gap:10px;}
+  .scan-row .act{flex:1;cursor:pointer;background:none;font-family:inherit;}
+  .scan-hint{text-align:center;font-size:11px;color:var(--muted);margin-top:12px;line-height:1.5;}
+
+  /* ---- QR modal overlay ---- */
+  .qr-overlay{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:24px;
+    background:rgba(22,17,11,.92);backdrop-filter:blur(3px);animation:ovfade .3s both;}
+  .qr-overlay.open{display:flex;}
+  @keyframes ovfade{from{opacity:0;}to{opacity:1;}}
+  .qr-modal{width:100%;max-width:340px;text-align:center;background:linear-gradient(180deg,var(--paper),var(--cream));
+    border:1px solid var(--gold);border-radius:6px;padding:30px 26px 24px;position:relative;animation:rise .5s cubic-bezier(.2,.7,.2,1) both;}
+  .qr-modal::before,.qr-modal::after{content:"";position:absolute;width:22px;height:22px;border-color:var(--gold);border-style:solid;opacity:.55;}
+  .qr-modal::before{top:11px;left:11px;border-width:1px 0 0 1px;}
+  .qr-modal::after{bottom:11px;right:11px;border-width:0 1px 1px 0;}
+  .qr-modal .qm-lbl{font-size:9px;letter-spacing:.36em;text-transform:uppercase;color:var(--gold);}
+  .qr-modal .qm-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;margin-top:5px;}
+  .qr-modal .qm-img{width:236px;height:236px;margin:18px auto 6px;background:#fff;padding:12px;border:1px solid var(--line);border-radius:4px;}
+  .qr-modal .qm-img img{width:100%;height:100%;display:block;}
+  .qr-modal .qm-desc{font-size:11px;color:#6a5c47;line-height:1.5;margin-top:4px;}
+  .qr-close{margin-top:18px;display:inline-flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;
+    border:1px solid var(--line);border-radius:999px;padding:9px 22px;background:none;color:var(--ink);font-family:inherit;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;transition:background .35s,color .35s;}
+  .qr-close:active{background:var(--ink);color:var(--cream);}
 </style>
 </head>
 <body>
@@ -232,6 +257,24 @@
 
     <div class="rule"><span></span><div class="dot"></div><span></span></div>
 
+    <!-- ===================== SCAN (QR launcher for the client) ===================== -->
+    <section>
+      <div class="sect-lbl">Scan</div>
+      <div class="scan-row">
+        <button class="act" type="button" onclick="openQR('vip')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3M20 14v.01M14 20h.01M20 20v.01M17 20h.01M20 17h.01"/></svg>
+          <span>VIP Card</span>
+        </button>
+        <button class="act" type="button" onclick="openQR('profile')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3M20 14v.01M14 20h.01M20 20v.01M17 20h.01M20 17h.01"/></svg>
+          <span>My Profile</span>
+        </button>
+      </div>
+      <p class="scan-hint">Tap a button and let your guest scan the code.</p>
+    </section>
+
+    <div class="rule"><span></span><div class="dot"></div><span></span></div>
+
     <!-- ===================== COMPANY BOOKING (no direct selling) ===================== -->
     <section class="company">
       <div class="c-lbl">Bookings</div>
@@ -255,5 +298,32 @@
     </div>
 
   </main>
+
+  <!-- ===================== QR OVERLAY ===================== -->
+  <div class="qr-overlay" id="qrOverlay" onclick="if(event.target===this)closeQR()">
+    <div class="qr-modal">
+      <div class="qm-lbl">Scan with your camera</div>
+      <div class="qm-title" id="qmTitle">VIP Card</div>
+      <div class="qm-img"><img id="qmImg" src="qr/qr_vipcard_bw.png" alt="QR code"></div>
+      <p class="qm-desc" id="qmDesc">A personal welcome at a historic Florentine leather atelier.</p>
+      <button class="qr-close" type="button" onclick="closeQR()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    var QR = {
+      vip:     {title:"VIP Card",   img:"qr/qr_vipcard_bw.png", desc:"A personal welcome at a historic Florentine leather atelier."},
+      profile: {title:"My Profile", img:"qr/qr_profile_bw.png", desc:"Experiences, reviews and contacts — the full profile."}
+    };
+    function openQR(k){
+      var d = QR[k];
+      document.getElementById("qmTitle").textContent = d.title;
+      document.getElementById("qmImg").src = d.img;
+      document.getElementById("qmDesc").textContent = d.desc;
+      document.getElementById("qrOverlay").classList.add("open");
+    }
+    function closeQR(){ document.getElementById("qrOverlay").classList.remove("open"); }
+    document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeQR(); });
+  </script>
 </body>
 </html>
