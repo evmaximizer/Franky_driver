@@ -170,10 +170,12 @@
         text:"One of the world's greatest art museums, built in 1560 by Vasari as offices ('uffizi') for the Medici administration. It holds the finest collection of Italian Renaissance painting anywhere — Botticelli, Leonardo, Michelangelo, Raphael, Caravaggio.",
         fact:"It is often called the world's first modern museum: the Medici opened it to visitors on request as early as the 16th century." },
       { name:"Accademia Gallery", full:"Galleria dell'Accademia", wiki:"Galleria dell'Accademia, Florence",
+        photoTitle:"David (Michelangelo)",
         mapsQ:"Galleria dell'Accademia, Firenze",
         text:"Home since 1873 to Michelangelo's David, carved from a single block of Carrara marble between 1501 and 1504 when the artist was in his twenties. The gallery also displays his unfinished 'Prisoners', figures that seem to struggle out of the raw stone.",
         fact:"The block David was carved from had been abandoned for decades as flawed — other sculptors had given up on it before Michelangelo." },
       { name:"Piazzale Michelangelo", full:"Piazzale Michelangelo", wiki:"Piazzale Michelangelo",
+        photoTitle:"Florence",
         mapsQ:"Piazzale Michelangelo, Firenze",
         text:"A panoramic terrace laid out in 1869 on a hill south of the river, offering the classic postcard view over Florence, its dome and the Arno. Best at sunset, when the whole city turns gold.",
         fact:"It was designed by architect Giuseppe Poggi, who also planned the tree-lined avenues that wind up to it — a single, theatrical approach to the view." }
@@ -232,6 +234,7 @@
   var current = 0;
 
   function mapsUrl(q){ return "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(q); }
+  function photoKey(p){ return p.photoTitle || p.wiki; }  // article whose lead image to use
 
   function buildTabs(){
     var t = document.getElementById("tabs");
@@ -253,12 +256,12 @@
     var places = CITIES[current].places;
     grid.innerHTML = places.map(function(p,idx){
       return '<button class="place" type="button" style="animation-delay:'+(idx*0.05)+'s" onclick="openP('+idx+')">'+
-               '<span class="thumb ph" data-wiki="'+encodeURIComponent(p.wiki)+'">'+pinSVG()+'</span>'+
+               '<span class="thumb ph" data-wiki="'+encodeURIComponent(photoKey(p))+'">'+pinSVG()+'</span>'+
                '<span class="cap"><span class="nm">'+p.name+'</span><span class="ct">'+CITIES[current].city+'</span></span>'+
              '</button>';
     }).join("");
     // lazy-load thumbnails from Wikipedia
-    places.forEach(function(p){ loadPhoto(p.wiki); });
+    places.forEach(function(p){ loadPhoto(photoKey(p)); });
   }
 
   function loadPhoto(title){
@@ -299,13 +302,14 @@
     var credit = document.getElementById("mCredit");
     ph.style.backgroundImage = ""; ph.classList.add("ph"); ph.innerHTML = pinSVG();
     credit.innerHTML = "";
-    var cache = photoCache[p.wiki];
+    var key = photoKey(p);
+    var cache = photoCache[key];
     function setPhoto(c2){
       if(c2 && c2.full){ ph.style.backgroundImage = "url('"+c2.full+"')"; ph.classList.remove("ph"); ph.innerHTML=""; }
       if(c2 && c2.page){ credit.innerHTML = 'Photo: Wikimedia · <a href="'+c2.page+'" target="_blank" rel="noopener">source</a>'; }
     }
     if(cache){ setPhoto(cache); }
-    else { loadPhoto(p.wiki); setTimeout(function(){ setPhoto(photoCache[p.wiki]); }, 600); }
+    else { loadPhoto(key); setTimeout(function(){ setPhoto(photoCache[key]); }, 600); }
 
     document.getElementById("ov").classList.add("open");
     document.body.style.overflow = "hidden";
