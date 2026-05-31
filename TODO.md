@@ -7,8 +7,22 @@ I placeholder nel codice sono scritti in MAIUSCOLO così sono facili da trovare.
 
 | Dove | Cosa | Valore attuale (placeholder) |
 |------|------|------------------------------|
-| `index.html` — Tips | Link PayPal personale | `https://paypal.me/PLACEHOLDER` |
 | `index.html` — Company | Contatto diretto del capo (opzionale) | commento nel blocco "Bookings" |
+
+## 🟠 Da verificare (accuratezza)
+
+- **Link PayPal tips**: impostato a `https://paypal.me/Ost378`. ⚠️ CONFERMARE che sia
+  l'handle PayPal.me corretto (il pulsante invia denaro reale lì).
+- **Pagina "Places & Stories"** (`places/index.html`): nuova pagina-guida collegata dalla
+  card "Places & Stories" nella landing. 4 città (Florence, Pisa, Lucca, Siena) con luoghi
+  come card; al tap si apre una scheda con foto + storia + curiosità + "Get directions".
+  - **Foto**: caricate live dall'API ufficiale di Wikipedia (licenze CC/pubblico dominio,
+    credito "Photo: Wikimedia" + link alla fonte). Servono internet sul telefono del cliente.
+    Se una foto non è ideale, si può forzare un'immagine specifica (dimmelo e la cambio).
+  - **Get directions**: usa il nome ufficiale del luogo (Google risolve all'ingresso).
+  - **Testi storici/curiosità**: scritti accurati e sintetici; rilettura consigliata.
+  - **Scalabile**: per aggiungere un luogo o una città basta estendere l'array `CITIES`
+    in fondo a `places/index.html` (istruzioni nei commenti del file).
 
 ### ✅ Compilati
 - **TripAdvisor**: collegato a `tripadvisor.it/...Stefano_Favilli_Autista_Personale...` (verificato funzionante).
@@ -16,12 +30,10 @@ I placeholder nel codice sono scritti in MAIUSCOLO così sono facili da trovare.
   ago–set 2023) inserite come citazioni tradotte in inglese nella sezione "A kind word".
   Per aggiungerne altre: duplicare un blocco `<blockquote class="quote">` in index.html.
 - **Google reviews**: RIMOSSO su richiesta (richiederebbe un profilo Google Business).
-- **Private tours (Passaggio)**: messo come *Coming soon* (bloccato), da agganciare quando Passaggio sarà pronto.
-
-### Nota sul link PayPal (tips)
-Il connettore PayPal collegato serve a creare fatture, non a ricevere mance da una pagina.
-Per il link "tips" serve un **PayPal.me**: vai su https://paypal.me, scegli un handle
-(es. `paypal.me/FrancescoUrbani`, gratuito), poi sostituisci `PLACEHOLDER` con quell'handle.
+- **Card "Places & Stories"**: la ex card "Private tours" ora apre la pagina-guida `places/`.
+  (Passaggio resta un'idea futura: quando l'app sarà pronta si potrà aggiungere una card a sé.)
+- **PayPal tips**: link `paypal.me/Ost378` + logo ufficiale PayPal (SVG) accanto al testo.
+- **Places & Stories**: pagina-guida dedicata (`places/`) — vedi sezione "Da verificare".
 
 ## 🟢 Decisioni prese (registro)
 

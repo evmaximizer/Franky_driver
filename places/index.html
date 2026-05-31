@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Places &amp; Stories · Franky · Florence &amp; Tuscany</title>
+<meta name="description" content="A little guide to Florence, Pisa, Lucca and Siena — what to see and the stories behind it. Curated by Franky, your personal driver in Tuscany.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2b2117;--gold:#9c7c41;--gold-soft:#b89a5e;
+    --cream:#f3ecdd;--paper:#faf5ea;--line:rgba(156,124,65,.30);--muted:#8a7a60;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{background:#1b150f;}
+  body{
+    font-family:'Jost',sans-serif;color:var(--ink);min-height:100vh;
+    padding:22px 15px 40px;
+    background:radial-gradient(circle at 50% -5%, #312618 0%, #16110b 72%);
+  }
+  .wrap{width:100%;max-width:460px;margin:0 auto;}
+
+  /* ---- Top bar ---- */
+  .topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px;animation:fade .8s both;}
+  .back{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--cream);
+    border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:10px;
+    letter-spacing:.22em;text-transform:uppercase;transition:background .35s,color .35s;}
+  .back svg{color:var(--gold-soft);}
+  .back:active{background:var(--gold);color:var(--ink);}
+
+  /* ---- Header ---- */
+  .head{text-align:center;margin-bottom:22px;animation:fade .9s .1s both;}
+  .head .lbl{font-size:9.5px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold-soft);}
+  .head h1{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:var(--cream);letter-spacing:.03em;margin-top:6px;}
+  .head p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#c8b896;margin-top:8px;line-height:1.5;}
+
+  /* ---- City tabs ---- */
+  .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;animation:fade .9s .2s both;}
+  .tab{border:1px solid var(--line);background:rgba(250,245,234,.06);color:#d9caa8;border-radius:999px;
+    padding:8px 16px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    cursor:pointer;transition:background .3s,color .3s,border-color .3s;}
+  .tab.active{background:var(--cream);color:var(--ink);border-color:var(--cream);}
+
+  /* ---- Card grid ---- */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .place{position:relative;border:1px solid var(--line);border-radius:5px;overflow:hidden;cursor:pointer;
+    background:linear-gradient(180deg,var(--paper),var(--cream));text-align:left;padding:0;font-family:inherit;color:var(--ink);
+    animation:rise .6s cubic-bezier(.2,.7,.2,1) both;}
+  .place .thumb{width:100%;height:108px;background:#d8cbb0 center/cover no-repeat;position:relative;display:block;}
+  .place .thumb.ph{display:flex;align-items:center;justify-content:center;color:var(--gold);background:linear-gradient(135deg,#efe7d6,#e3d8bf);}
+  .place .cap{padding:11px 12px 13px;}
+  .place .cap .nm{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;line-height:1.1;}
+  .place .cap .ct{font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-top:4px;}
+
+  /* ---- Modal ---- */
+  .ov{position:fixed;inset:0;z-index:60;display:none;align-items:flex-start;justify-content:center;
+    padding:20px 14px;overflow-y:auto;background:rgba(22,17,11,.93);backdrop-filter:blur(3px);animation:ovf .3s both;}
+  .ov.open{display:flex;}
+  @keyframes ovf{from{opacity:0}to{opacity:1}}
+  .modal{width:100%;max-width:420px;background:linear-gradient(180deg,var(--paper),var(--cream));
+    border:1px solid var(--gold);border-radius:6px;overflow:hidden;position:relative;margin:auto;
+    animation:rise .5s cubic-bezier(.2,.7,.2,1) both;}
+  .modal .mphoto{width:100%;height:210px;background:#d8cbb0 center/cover no-repeat;}
+  .modal .mphoto.ph{display:flex;align-items:center;justify-content:center;color:var(--gold);background:linear-gradient(135deg,#efe7d6,#e3d8bf);}
+  .modal .mbody{padding:22px 22px 24px;}
+  .modal .mlbl{font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);}
+  .modal .mtt{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:600;line-height:1.1;margin-top:5px;}
+  .modal .mfull{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:5px;}
+  .modal .rule{display:flex;align-items:center;gap:10px;margin:16px 0;}
+  .modal .rule span{height:1px;flex:1;background:var(--line);}
+  .modal .rule .dot{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);}
+  .modal .mtext{font-size:13px;line-height:1.7;color:#5f5240;}
+  .modal .mfact{font-size:12.5px;line-height:1.65;color:var(--ink);margin-top:14px;padding:13px 14px;background:rgba(156,124,65,.08);border-left:2px solid var(--gold);border-radius:3px;}
+  .modal .mfact b{display:block;color:var(--gold);font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:9px;margin-bottom:5px;}
+  .modal .mdir{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;text-decoration:none;
+    color:var(--cream);background:var(--ink);border-radius:999px;padding:13px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;transition:background .35s;}
+  .modal .mdir svg{color:var(--gold-soft);}
+  .modal .mdir:active{background:var(--gold);color:var(--ink);}
+  .modal .credit{display:block;text-align:center;font-size:9px;color:var(--muted);margin-top:14px;letter-spacing:.04em;}
+  .modal .credit a{color:var(--gold);text-decoration:none;}
+  .mclose{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;
+    background:rgba(22,17,11,.55);color:#fff;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;}
+
+  .foot{text-align:center;margin-top:26px;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#a4937a;animation:fade .9s .4s both;}
+
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="topbar">
+      <a class="back" href="../">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        <span>Back</span>
+      </a>
+    </div>
+
+    <div class="head">
+      <div class="lbl">Franky · Personal Driver &amp; Concierge</div>
+      <h1>Places &amp; Stories</h1>
+      <p>A few of my favourite places across Tuscany —<br>what to see, and the stories behind them.</p>
+    </div>
+
+    <div class="tabs" id="tabs"></div>
+    <div class="grid" id="grid"></div>
+
+    <div class="foot">Tap a place to discover it</div>
+  </div>
+
+  <!-- ===================== MODAL ===================== -->
+  <div class="ov" id="ov" onclick="if(event.target===this)closeP()">
+    <div class="modal">
+      <button class="mclose" type="button" onclick="closeP()" aria-label="Close">✕</button>
+      <div class="mphoto ph" id="mPhoto"></div>
+      <div class="mbody">
+        <div class="mlbl" id="mCity">Florence</div>
+        <div class="mtt" id="mName">—</div>
+        <div class="mfull" id="mFull"></div>
+        <div class="rule"><span></span><div class="dot"></div><span></span></div>
+        <p class="mtext" id="mText"></p>
+        <div class="mfact"><b>Did you know</b><span id="mFact"></span></div>
+        <a class="mdir" id="mDir" href="#" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          <span>Get directions</span>
+        </a>
+        <span class="credit" id="mCredit"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  /* ============================================================
+     DATA — fully scalable.
+     To add a city: push an object to CITIES.
+     To add a place: add an object to that city's places[].
+       name  : short display name
+       full  : official / full name (shown small)
+       wiki  : exact English Wikipedia article title (used to load the photo
+               via the official Wikipedia REST API, in the visitor's browser)
+       text  : 2-3 sentences of history (curated, in English)
+       fact  : one fun/curious detail
+       mapsQ : Google Maps destination query (place name + city)
+     Photos are loaded live from Wikipedia (Creative-Commons / public domain),
+     with an elegant placeholder fallback if an image is missing.
+  ============================================================ */
+  var CITIES = [
+    { city:"Florence", places:[
+      { name:"Duomo", full:"Cattedrale di Santa Maria del Fiore", wiki:"Florence Cathedral",
+        mapsQ:"Cattedrale di Santa Maria del Fiore, Firenze",
+        text:"Florence's cathedral was begun in 1296 and crowned in 1436 by Filippo Brunelleschi's dome — still the largest masonry dome ever built. Its green, white and pink marble facade is a 19th-century neo-Gothic masterpiece, and the bell tower beside it was designed by the painter Giotto.",
+        fact:"Brunelleschi raised the dome with no wooden centering, inventing the hoisting machines as he went — and reportedly watered down the workers' wine so nobody grew dizzy at the top." },
+      { name:"Ponte Vecchio", full:"Ponte Vecchio", wiki:"Ponte Vecchio",
+        mapsQ:"Ponte Vecchio, Firenze",
+        text:"The oldest bridge in Florence, rebuilt in 1345, is lined with shops. Since 1593 they have belonged to goldsmiths and jewellers, by decree of Grand Duke Ferdinando I, who banished the smelly butchers crowding it before. Above runs the Vasari Corridor, the Medici's private elevated walkway.",
+        fact:"It was the only Florentine bridge to survive World War II — the story goes it was spared on Hitler's own order while every other bridge was destroyed." },
+      { name:"Palazzo Vecchio", full:"Palazzo Vecchio", wiki:"Palazzo Vecchio",
+        mapsQ:"Palazzo Vecchio, Firenze",
+        text:"Florence's fortress-like town hall has dominated the city's civic life since around 1300. Once the seat of the Republic and briefly of the Medici dukes, its Salone dei Cinquecento is covered in vast frescoes by Giorgio Vasari.",
+        fact:"The statue of David outside is a copy — Michelangelo's original stood here from 1504 until it moved to the Accademia in 1873." },
+      { name:"Piazza della Signoria", full:"Piazza della Signoria", wiki:"Piazza della Signoria",
+        mapsQ:"Piazza della Signoria, Firenze",
+        text:"The political heart of Florence for seven centuries, this L-shaped square is an open-air sculpture gallery in front of Palazzo Vecchio, with the graceful Loggia dei Lanzi sheltering Renaissance and ancient statues.",
+        fact:"A small marble disc set in the pavement marks the exact spot where the friar Savonarola was hanged and burned in 1498." },
+      { name:"Uffizi Gallery", full:"Galleria degli Uffizi", wiki:"Uffizi",
+        mapsQ:"Galleria degli Uffizi, Firenze",
+        text:"One of the world's greatest art museums, built in 1560 by Vasari as offices ('uffizi') for the Medici administration. It holds the finest collection of Italian Renaissance painting anywhere — Botticelli, Leonardo, Michelangelo, Raphael, Caravaggio.",
+        fact:"It is often called the world's first modern museum: the Medici opened it to visitors on request as early as the 16th century." },
+      { name:"Accademia Gallery", full:"Galleria dell'Accademia", wiki:"Galleria dell'Accademia, Florence",
+        mapsQ:"Galleria dell'Accademia, Firenze",
+        text:"Home since 1873 to Michelangelo's David, carved from a single block of Carrara marble between 1501 and 1504 when the artist was in his twenties. The gallery also displays his unfinished 'Prisoners', figures that seem to struggle out of the raw stone.",
+        fact:"The block David was carved from had been abandoned for decades as flawed — other sculptors had given up on it before Michelangelo." },
+      { name:"Piazzale Michelangelo", full:"Piazzale Michelangelo", wiki:"Piazzale Michelangelo",
+        mapsQ:"Piazzale Michelangelo, Firenze",
+        text:"A panoramic terrace laid out in 1869 on a hill south of the river, offering the classic postcard view over Florence, its dome and the Arno. Best at sunset, when the whole city turns gold.",
+        fact:"It was designed by architect Giuseppe Poggi, who also planned the tree-lined avenues that wind up to it — a single, theatrical approach to the view." }
+    ]},
+    { city:"Pisa", places:[
+      { name:"Leaning Tower", full:"Torre di Pisa", wiki:"Leaning Tower of Pisa",
+        mapsQ:"Leaning Tower of Pisa",
+        text:"The famous bell tower of Pisa's cathedral began leaning during construction in the 12th century, as its shallow foundations settled into soft ground. Work stopped for nearly a century, which accidentally let the soil stabilise and saved it from collapse.",
+        fact:"A major rescue project from 1990 to 2001 gently reduced the tilt — engineers say it should now stay stable for at least 200 years." },
+      { name:"Piazza dei Miracoli", full:"Piazza del Duomo, Pisa", wiki:"Piazza dei Miracoli",
+        mapsQ:"Piazza dei Miracoli, Pisa",
+        text:"The 'Square of Miracles' is a vast green lawn holding four masterpieces of medieval architecture: the cathedral, the baptistery, the leaning bell tower and the monumental cemetery, all in gleaming white marble.",
+        fact:"The poet Gabriele D'Annunzio gave the square its nickname, calling it the 'meadow of miracles'." },
+      { name:"Pisa Cathedral", full:"Duomo di Pisa", wiki:"Pisa Cathedral",
+        mapsQ:"Cattedrale di Pisa",
+        text:"Begun in 1063, this is the centrepiece of the Piazza dei Miracoli and a model of Pisan Romanesque style, with its striped marble and tiers of delicate columns. Galileo is said to have studied the swinging lamp inside.",
+        fact:"Watching that hanging lamp sway, Galileo reportedly worked out that a pendulum's swing always takes the same time — a discovery that led to the pendulum clock." }
+    ]},
+    { city:"Lucca", places:[
+      { name:"City Walls", full:"Mura di Lucca", wiki:"Walls of Lucca",
+        mapsQ:"Mura di Lucca",
+        text:"Lucca is ringed by perfectly preserved Renaissance walls, over four kilometres around, built between the 16th and 17th centuries. Never needed for defence, they were turned into a tree-lined promenade in the 1800s.",
+        fact:"Today the top of the walls is a continuous park — locals walk, cycle and jog a full loop around the city, high above the streets." },
+      { name:"Piazza dell'Anfiteatro", full:"Piazza dell'Anfiteatro", wiki:"Piazza dell'Anfiteatro",
+        mapsQ:"Piazza dell'Anfiteatro, Lucca",
+        text:"This oval square traces the exact shape of a Roman amphitheatre that once stood here. Medieval houses were built right onto its ruins, so the arena's outline survives in a perfect ring of buildings.",
+        fact:"The 'arches' you can still spot in the surrounding walls were the amphitheatre's original entrances, now doorways and shops." },
+      { name:"Guinigi Tower", full:"Torre Guinigi", wiki:"Guinigi Tower",
+        mapsQ:"Torre Guinigi, Lucca",
+        text:"A 14th-century tower built by the powerful Guinigi family, rising about 45 metres over Lucca's rooftops. It is crowned by something unique — a small garden of holm oak trees growing at the very top.",
+        fact:"Those rooftop oaks are centuries old in tradition, a living symbol of rebirth that has become the emblem of the whole city." },
+      { name:"San Martino Cathedral", full:"Cattedrale di San Martino", wiki:"Lucca Cathedral",
+        mapsQ:"Cattedrale di San Martino, Lucca",
+        text:"Lucca's cathedral, mostly built from the 11th to 14th centuries, mixes Romanesque and Gothic in its asymmetrical marble facade. Inside is the Volto Santo, a revered medieval wooden crucifix, and a famous Renaissance tomb.",
+        fact:"The tomb of Ilaria del Carretto, carved by Jacopo della Quercia, is so lifelike that a little dog rests at her feet — it has moved visitors for six hundred years." }
+    ]},
+    { city:"Siena", places:[
+      { name:"Piazza del Campo", full:"Piazza del Campo", wiki:"Piazza del Campo",
+        mapsQ:"Piazza del Campo, Siena",
+        text:"One of Europe's greatest medieval squares, shaped like a shell and paved in red brick divided into nine segments. It has been the heart of Sienese life since the 1300s and hosts the famous Palio horse race.",
+        fact:"Twice each summer the square becomes a racetrack: bareback riders representing the city's districts thunder around it in a race lasting barely 90 seconds." },
+      { name:"Siena Cathedral", full:"Duomo di Siena", wiki:"Siena Cathedral",
+        mapsQ:"Duomo di Siena",
+        text:"A dazzling Gothic cathedral of black-and-white striped marble, built mainly in the 13th century. Its floor is an extraordinary mosaic of 56 inlaid panels, and the interior holds works by Donatello, Michelangelo and Bernini.",
+        fact:"Siena once planned to make this the largest church in the world — you can still see the unfinished 'New Cathedral' nave, halted by the Black Death of 1348." },
+      { name:"Torre del Mangia", full:"Torre del Mangia", wiki:"Torre del Mangia",
+        mapsQ:"Torre del Mangia, Siena",
+        text:"The soaring bell tower of Siena's town hall, finished in 1348 and one of the tallest medieval towers in Italy at about 88 metres. Climbing its 400 steps rewards you with a sweeping view over the rooftops and hills.",
+        fact:"It is named after its first bell-ringer, nicknamed 'Mangiaguadagni' — 'eat-the-profits' — for how quickly he spent his wages." }
+    ]}
+  ];
+
+  /* ---------- rendering ---------- */
+  var WIKI = "https://en.wikipedia.org/api/rest_v1/page/summary/";
+  var photoCache = {}; // wiki title -> {thumb, full, page}
+  var current = 0;
+
+  function mapsUrl(q){ return "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(q); }
+
+  function buildTabs(){
+    var t = document.getElementById("tabs");
+    t.innerHTML = CITIES.map(function(c,i){
+      return '<button class="tab'+(i===0?' active':'')+'" type="button" onclick="selectCity('+i+')">'+c.city+'</button>';
+    }).join("");
+  }
+
+  function selectCity(i){
+    current = i;
+    document.querySelectorAll(".tab").forEach(function(el,idx){ el.classList.toggle("active", idx===i); });
+    buildGrid();
+  }
+
+  function pinSVG(){ return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>'; }
+
+  function buildGrid(){
+    var grid = document.getElementById("grid");
+    var places = CITIES[current].places;
+    grid.innerHTML = places.map(function(p,idx){
+      return '<button class="place" type="button" style="animation-delay:'+(idx*0.05)+'s" onclick="openP('+idx+')">'+
+               '<span class="thumb ph" data-wiki="'+encodeURIComponent(p.wiki)+'">'+pinSVG()+'</span>'+
+               '<span class="cap"><span class="nm">'+p.name+'</span><span class="ct">'+CITIES[current].city+'</span></span>'+
+             '</button>';
+    }).join("");
+    // lazy-load thumbnails from Wikipedia
+    places.forEach(function(p){ loadPhoto(p.wiki); });
+  }
+
+  function loadPhoto(title){
+    if(photoCache[title]){ applyThumbs(title); return; }
+    fetch(WIKI + encodeURIComponent(title))
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(d){
+        if(!d) return;
+        photoCache[title] = {
+          thumb: d.thumbnail ? d.thumbnail.source : null,
+          full:  d.originalimage ? d.originalimage.source : (d.thumbnail ? d.thumbnail.source : null),
+          page:  d.content_urls && d.content_urls.desktop ? d.content_urls.desktop.page : null
+        };
+        applyThumbs(title);
+      })
+      .catch(function(){});
+  }
+
+  function applyThumbs(title){
+    var c = photoCache[title]; if(!c || !c.thumb) return;
+    document.querySelectorAll('.thumb[data-wiki="'+encodeURIComponent(title)+'"]').forEach(function(el){
+      el.style.backgroundImage = "url('"+c.thumb+"')";
+      el.classList.remove("ph");
+      el.innerHTML = "";
+    });
+  }
+
+  function openP(idx){
+    var c = CITIES[current], p = c.places[idx];
+    document.getElementById("mCity").textContent = c.city;
+    document.getElementById("mName").textContent = p.name;
+    document.getElementById("mFull").textContent = (p.full && p.full!==p.name) ? p.full : "";
+    document.getElementById("mText").textContent = p.text;
+    document.getElementById("mFact").textContent = p.fact;
+    document.getElementById("mDir").href = mapsUrl(p.mapsQ);
+
+    var ph = document.getElementById("mPhoto");
+    var credit = document.getElementById("mCredit");
+    ph.style.backgroundImage = ""; ph.classList.add("ph"); ph.innerHTML = pinSVG();
+    credit.innerHTML = "";
+    var cache = photoCache[p.wiki];
+    function setPhoto(c2){
+      if(c2 && c2.full){ ph.style.backgroundImage = "url('"+c2.full+"')"; ph.classList.remove("ph"); ph.innerHTML=""; }
+      if(c2 && c2.page){ credit.innerHTML = 'Photo: Wikimedia · <a href="'+c2.page+'" target="_blank" rel="noopener">source</a>'; }
+    }
+    if(cache){ setPhoto(cache); }
+    else { loadPhoto(p.wiki); setTimeout(function(){ setPhoto(photoCache[p.wiki]); }, 600); }
+
+    document.getElementById("ov").classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+  function closeP(){
+    document.getElementById("ov").classList.remove("open");
+    document.body.style.overflow = "";
+  }
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeP(); });
+
+  buildTabs();
+  buildGrid();
+  </script>
+</body>
+</html>
