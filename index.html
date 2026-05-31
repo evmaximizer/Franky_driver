@@ -93,6 +93,10 @@
   .stars svg{width:20px;height:20px;filter:drop-shadow(0 1px 1px rgba(156,124,65,.25));}
   .rep .msg{font-size:13px;line-height:1.7;color:#6a5c47;font-weight:300;padding:0 2px;margin-bottom:16px;}
   .rep .msg b{font-weight:500;color:var(--ink);}
+  .quotes{display:flex;flex-direction:column;gap:12px;margin-bottom:18px;}
+  .quote{border:1px solid var(--line);border-radius:4px;padding:16px 16px 14px;background:rgba(255,255,255,.35);text-align:left;}
+  .quote p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;line-height:1.5;color:var(--ink);}
+  .quote .qa{display:block;margin-top:9px;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-style:normal;}
   .rep-btns{display:flex;gap:10px;}
   .rep-btns .act{flex:1;}
 
@@ -233,15 +237,30 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9"/></svg>
       </div>
       <p class="msg">If your day with me was special, the nicest thing you can do is <b>leave a five-star review</b> — and remember to <b>ask for Franky</b> next time you are in Florence.</p>
+      <!-- TESTIMONIANZE: citazioni reali dei clienti (da screenshot TripAdvisor) -->
+      <!-- Per aggiungerne una: duplica un blocco <blockquote class="quote">. -->
+      <div class="quotes">
+        <blockquote class="quote">
+          <p>“Francesco was an extraordinary guide. He took us beyond all the main sights of Florence and the Leaning Tower of Pisa, then organised everything to find a beautiful castle in the Tuscan countryside. I couldn't have asked for a better experience.”</p>
+          <span class="qa">— Melissa L · Aug 2023 · via TripAdvisor</span>
+        </blockquote>
+        <blockquote class="quote">
+          <p>“Francesco was an incredible host for the day. Extremely flexible with our itinerary and full of great advice. When we said we'd love to taste some wine, he found a beautiful winery on the way back. Next time in Florence we'll call Francesco for another tour!”</p>
+          <span class="qa">— Mike M · Port Jefferson, NY · Aug 2023 · via TripAdvisor</span>
+        </blockquote>
+        <blockquote class="quote">
+          <p>“An extraordinary experience — I highly recommend it to anyone exploring Tuscany. Very professional and informative. Francesco was fantastic, easy-going and available throughout the whole trip.”</p>
+          <span class="qa">— Chris M · Sep 2023 · via TripAdvisor</span>
+        </blockquote>
+        <blockquote class="quote">
+          <p>“We travelled from Florence to Lyon by car instead of flying. Francesco, our driver, was so helpful, knowledgeable and lovely that he made it a wonderful journey — stopping wherever we wished. Highly recommended, 10/10!”</p>
+          <span class="qa">— Sally B · Melbourne, Australia · Sep 2023 · via TripAdvisor</span>
+        </blockquote>
+      </div>
       <div class="rep-btns">
-        <!-- PLACEHOLDER: incollare il link recensioni Google (serve un profilo Google Business) -->
-        <a class="act" href="https://GOOGLE-REVIEWS-PLACEHOLDER" target="_blank" rel="noopener">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9"/></svg>
-          <span>Google</span>
-        </a>
         <a class="act" href="https://www.tripadvisor.it/Attraction_Review-g187897-d7757047-Reviews-Stefano_Favilli_Autista_Personale-Livorno_Province_of_Livorno_Tuscany.html" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9"/></svg>
-          <span>TripAdvisor</span>
+          <span>Read &amp; review on TripAdvisor</span>
         </a>
       </div>
     </section>

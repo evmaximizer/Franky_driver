@@ -8,21 +8,15 @@ I placeholder nel codice sono scritti in MAIUSCOLO così sono facili da trovare.
 | Dove | Cosa | Valore attuale (placeholder) |
 |------|------|------------------------------|
 | `index.html` — Tips | Link PayPal personale | `https://paypal.me/PLACEHOLDER` |
-| `index.html` — Reputation | Link recensioni **Google** | `https://GOOGLE-REVIEWS-PLACEHOLDER` (serve profilo Google Business) |
 | `index.html` — Company | Contatto diretto del capo (opzionale) | commento nel blocco "Bookings" |
 
 ### ✅ Compilati
-- **TripAdvisor**: collegato a `tripadvisor.it/...Stefano_Favilli_Autista_Personale...`.
-  ⚠️ DA VERIFICARE: la scheda è intestata a "Stefano Favilli", non a Francesco Urbani/Franky.
-  Confermare che sia il profilo corretto o crearne uno per Franky.
+- **TripAdvisor**: collegato a `tripadvisor.it/...Stefano_Favilli_Autista_Personale...` (verificato funzionante).
+- **Testimonianze**: 4 recensioni reali TripAdvisor (Melissa L, Mike M, Chris M, Sally B,
+  ago–set 2023) inserite come citazioni tradotte in inglese nella sezione "A kind word".
+  Per aggiungerne altre: duplicare un blocco `<blockquote class="quote">` in index.html.
+- **Google reviews**: RIMOSSO su richiesta (richiederebbe un profilo Google Business).
 - **Private tours (Passaggio)**: messo come *Coming soon* (bloccato), da agganciare quando Passaggio sarà pronto.
-
-### ℹ️ Google reviews — come ottenere il link
-Per raccogliere recensioni su Google serve un **profilo Google Business** (gratuito).
-Opzioni: (a) creare un account Gmail dedicato e poi un Profilo dell'attività su
-business.google.com; (b) il profilo genera un link "scrivi recensione" da incollare
-al posto di `GOOGLE-REVIEWS-PLACEHOLDER`. Senza profilo Business non esiste un link
-recensioni Google. NB: come per TripAdvisor, valutare il vincolo da dipendente NCC.
 
 ### Nota sul link PayPal (tips)
 Il connettore PayPal collegato serve a creare fatture, non a ricevere mance da una pagina.
