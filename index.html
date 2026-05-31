@@ -89,6 +89,8 @@
 
   /* ---- Reputation ---- */
   .rep{text-align:center;}
+  .stars{display:flex;justify-content:center;gap:6px;margin-bottom:12px;color:var(--gold);}
+  .stars svg{width:20px;height:20px;filter:drop-shadow(0 1px 1px rgba(156,124,65,.25));}
   .rep .msg{font-size:13px;line-height:1.7;color:#6a5c47;font-weight:300;padding:0 2px;margin-bottom:16px;}
   .rep .msg b{font-weight:500;color:var(--ink);}
   .rep-btns{display:flex;gap:10px;}
@@ -189,8 +191,8 @@
           <span class="b-arrow">→</span>
         </a>
 
-        <!-- Ramo 2: Private tours → Passaggio (link esterno, PLACEHOLDER) -->
-        <a class="branch d2" href="https://PASSAGGIO-URL-PLACEHOLDER" target="_blank" rel="noopener">
+        <!-- Ramo 2: Private tours → Passaggio (coming soon, da agganciare in futuro) -->
+        <div class="branch soon d2">
           <span class="b-ico">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
           </span>
@@ -199,8 +201,8 @@
             <span class="b-title">Florence &amp; Tuscany</span>
             <span class="b-desc">Curated routes and stories, at your own pace.</span>
           </span>
-          <span class="b-arrow">→</span>
-        </a>
+          <span class="pill-soon">Coming soon</span>
+        </div>
 
         <!-- Ramo 3 (slot predisposto): Wine tasting San Gimignano — coming soon -->
         <div class="branch soon d3">
@@ -223,15 +225,21 @@
     <!-- ===================== REPUTATION ===================== -->
     <section class="rep">
       <div class="sect-lbl">A kind word</div>
-      <p class="msg">If your day with me was special, the nicest thing you can do is <b>share it</b> — and remember to <b>ask for Franky</b> next time you are in Florence.</p>
+      <div class="stars" aria-label="Five stars">
+        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9"/></svg>
+      </div>
+      <p class="msg">If your day with me was special, the nicest thing you can do is <b>leave a five-star review</b> — and remember to <b>ask for Franky</b> next time you are in Florence.</p>
       <div class="rep-btns">
-        <!-- PLACEHOLDER: incollare il link recensioni Google -->
+        <!-- PLACEHOLDER: incollare il link recensioni Google (serve un profilo Google Business) -->
         <a class="act" href="https://GOOGLE-REVIEWS-PLACEHOLDER" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9"/></svg>
           <span>Google</span>
         </a>
-        <!-- PLACEHOLDER: incollare il link TripAdvisor -->
-        <a class="act" href="https://TRIPADVISOR-PLACEHOLDER" target="_blank" rel="noopener">
+        <a class="act" href="https://www.tripadvisor.it/Attraction_Review-g187897-d7757047-Reviews-Stefano_Favilli_Autista_Personale-Livorno_Province_of_Livorno_Tuscany.html" target="_blank" rel="noopener">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15 9 22 9 16.5 13.5 18.5 21 12 16.5 5.5 21 7.5 13.5 2 9 9 9"/></svg>
           <span>TripAdvisor</span>
         </a>
