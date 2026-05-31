@@ -63,6 +63,7 @@
     border:1px solid var(--gold);border-radius:6px;overflow:hidden;position:relative;margin:auto;
     animation:rise .5s cubic-bezier(.2,.7,.2,1) both;}
   .modal .mphoto{width:100%;height:210px;background:#d8cbb0 center/cover no-repeat;}
+  .modal .mphoto.tall{height:320px;background-color:#1b150f;background-size:contain;}
   .modal .mphoto.ph{display:flex;align-items:center;justify-content:center;color:var(--gold);background:linear-gradient(135deg,#efe7d6,#e3d8bf);}
   .modal .mbody{padding:22px 22px 24px;}
   .modal .mlbl{font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);}
@@ -170,7 +171,7 @@
         text:"One of the world's greatest art museums, built in 1560 by Vasari as offices ('uffizi') for the Medici administration. It holds the finest collection of Italian Renaissance painting anywhere — Botticelli, Leonardo, Michelangelo, Raphael, Caravaggio.",
         fact:"It is often called the world's first modern museum: the Medici opened it to visitors on request as early as the 16th century." },
       { name:"Accademia Gallery", full:"Galleria dell'Accademia", wiki:"Galleria dell'Accademia, Florence",
-        photoTitle:"David (Michelangelo)",
+        photoTitle:"David (Michelangelo)", photoTall:true,
         mapsQ:"Galleria dell'Accademia, Firenze",
         text:"Home since 1873 to Michelangelo's David, carved from a single block of Carrara marble between 1501 and 1504 when the artist was in his twenties. The gallery also displays his unfinished 'Prisoners', figures that seem to struggle out of the raw stone.",
         fact:"The block David was carved from had been abandoned for decades as flawed — other sculptors had given up on it before Michelangelo." },
@@ -301,6 +302,7 @@
     var ph = document.getElementById("mPhoto");
     var credit = document.getElementById("mCredit");
     ph.style.backgroundImage = ""; ph.classList.add("ph"); ph.innerHTML = pinSVG();
+    ph.classList.toggle("tall", !!p.photoTall);  // 'contain' fit for vertical subjects (e.g. David)
     credit.innerHTML = "";
     var key = photoKey(p);
     var cache = photoCache[key];
