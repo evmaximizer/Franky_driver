@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Places &amp; Stories · Franky · Florence &amp; Tuscany</title>
-<meta name="description" content="A little guide to Florence, Pisa, Lucca and Siena — what to see and the stories behind it. Curated by Franky, your personal driver in Tuscany.">
+<title>Places &amp; Stories · Francesco Urbani · Florence &amp; Tuscany</title>
+<meta name="description" content="A little guide to Florence, Pisa, Lucca and Siena — what to see and the stories behind it. Curated by Francesco Urbani, your personal driver in Tuscany.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -79,6 +79,12 @@
     color:var(--cream);background:var(--ink);border-radius:999px;padding:13px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;transition:background .35s;}
   .modal .mdir svg{color:var(--gold-soft);}
   .modal .mdir:active{background:var(--gold);color:var(--ink);}
+  .modal .mbook{display:none;align-items:center;justify-content:center;gap:8px;margin-top:10px;text-decoration:none;
+    color:var(--ink);background:none;border:1px solid var(--gold);border-radius:999px;padding:12px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;transition:background .35s,color .35s;}
+  .modal .mbook svg{color:var(--gold);transition:color .35s;}
+  .modal .mbook.show{display:flex;}
+  .modal .mbook:active{background:var(--gold);color:var(--ink);}
+  .modal .mbook:active svg{color:var(--ink);}
   .modal .credit{display:block;text-align:center;font-size:9px;color:var(--muted);margin-top:14px;letter-spacing:.04em;}
   .modal .credit a{color:var(--gold);text-decoration:none;}
   .mclose{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;border:0;cursor:pointer;
@@ -101,7 +107,7 @@
     </div>
 
     <div class="head">
-      <div class="lbl">Franky · Personal Driver &amp; Concierge</div>
+      <div class="lbl">Francesco Urbani · Personal Driver &amp; Concierge</div>
       <h1>Places &amp; Stories</h1>
       <p>A few of my favourite places across Tuscany —<br>what to see, and the stories behind them.</p>
     </div>
@@ -127,6 +133,10 @@
         <a class="mdir" id="mDir" href="#" target="_blank" rel="noopener">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
           <span>Get directions</span>
+        </a>
+        <a class="mbook" id="mBook" href="#" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>
+          <span id="mBookLbl">Book tickets online</span>
         </a>
         <span class="credit" id="mCredit"></span>
       </div>
@@ -168,11 +178,13 @@
         fact:"A small marble disc set in the pavement marks the exact spot where the friar Savonarola was hanged and burned in 1498." },
       { name:"Uffizi Gallery", full:"Galleria degli Uffizi", wiki:"Uffizi",
         mapsQ:"Galleria degli Uffizi, Firenze",
+        book:"https://tickets.uffizi.it", bookLbl:"Book on the official site",
         text:"One of the world's greatest art museums, built in 1560 by Vasari as offices ('uffizi') for the Medici administration. It holds the finest collection of Italian Renaissance painting anywhere — Botticelli, Leonardo, Michelangelo, Raphael, Caravaggio.",
         fact:"It is often called the world's first modern museum: the Medici opened it to visitors on request as early as the 16th century." },
       { name:"Accademia Gallery", full:"Galleria dell'Accademia", wiki:"Galleria dell'Accademia, Florence",
         photoTitle:"David (Michelangelo)", photoTall:true,
         mapsQ:"Galleria dell'Accademia, Firenze",
+        book:"https://www.b-ticket.com/b-ticket/firenzemusei/", bookLbl:"Book on the official site",
         text:"Home since 1873 to Michelangelo's David, carved from a single block of Carrara marble between 1501 and 1504 when the artist was in his twenties. The gallery also displays his unfinished 'Prisoners', figures that seem to struggle out of the raw stone.",
         fact:"The block David was carved from had been abandoned for decades as flawed — other sculptors had given up on it before Michelangelo." },
       { name:"Piazzale Michelangelo", full:"Piazzale Michelangelo", wiki:"Piazzale Michelangelo",
@@ -198,16 +210,19 @@
         fact:"The monks' ancient pharmacy nearby, the Officina Profumo-Farmaceutica, has been making perfumes and remedies since 1612 — one of the oldest in the world." },
       { name:"Galileo Museum", full:"Museo Galileo", wiki:"Museo Galileo",
         mapsQ:"Museo Galileo, Firenze",
+        book:"https://biglietteria.museogalileo.it/", bookLbl:"Book on the official site",
         text:"Right by the Uffizi, this museum holds one of the world's finest collections of historic scientific instruments — telescopes, globes, clocks and early experiments, much of it from the Medici and Lorraine collections.",
         fact:"Among its treasures are two of Galileo's original telescopes, and — remarkably — one of his fingers, preserved as a relic of science." },
       { name:"Museum of Illusions", full:"Museo delle Illusioni Firenze", wiki:"Museum of Illusions",
         mapsQ:"Museo delle Illusioni, Firenze",
+        book:"https://museumofillusions.it/en/tickets/entrance-ticket/", bookLbl:"Book on the official site",
         text:"A playful, hands-on museum full of optical illusions, mind-bending rooms and photo opportunities — a fun, lighter stop, especially with family, amid Florence's masterpieces.",
         fact:"Its 'Ames room' makes people appear to grow or shrink as they cross it — your eyes insist it's true even when you know the trick." }
     ]},
     { city:"Pisa", places:[
       { name:"Leaning Tower", full:"Torre di Pisa", wiki:"Leaning Tower of Pisa",
         mapsQ:"Leaning Tower of Pisa",
+        book:"https://www.opapisa.it/en/tickets/buy/", bookLbl:"Book on the official site",
         text:"The famous bell tower of Pisa's cathedral began leaning during construction in the 12th century, as its shallow foundations settled into soft ground. Work stopped for nearly a century, which accidentally let the soil stabilise and saved it from collapse.",
         fact:"A major rescue project from 1990 to 2001 gently reduced the tilt — engineers say it should now stay stable for at least 200 years." },
       { name:"Piazza dei Miracoli", full:"Piazza del Duomo, Pisa", wiki:"Piazza dei Miracoli",
@@ -322,6 +337,16 @@
     document.getElementById("mText").textContent = p.text;
     document.getElementById("mFact").textContent = p.fact;
     document.getElementById("mDir").href = mapsUrl(p.mapsQ);
+
+    var bk = document.getElementById("mBook");
+    if(p.book){
+      bk.href = p.book;
+      document.getElementById("mBookLbl").textContent = p.bookLbl || "Book tickets online";
+      bk.classList.add("show");
+    } else {
+      bk.classList.remove("show");
+      bk.removeAttribute("href");
+    }
 
     var ph = document.getElementById("mPhoto");
     var credit = document.getElementById("mCredit");
