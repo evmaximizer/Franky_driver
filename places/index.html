@@ -223,7 +223,7 @@
         text:"Florence's great food market, set in a soaring 19th-century iron-and-glass hall near San Lorenzo. The ground floor brims with fresh produce, cheese, meat and Tuscan specialities; upstairs, a lively food hall serves everything from fresh pasta to pizza and local wine.",
         fact:"Try the Florentine classic here: a 'lampredotto' sandwich — the city's beloved street food, made from slow-cooked tripe." },
       { name:"All'Antico Vinaio", full:"All'Antico Vinaio · Via dei Neri", wiki:"All'Antico Vinaio", tag:"Food & Wine",
-        photoTitle:"Schiacciata",
+        photo:"../assets/antico_vinaio.png",
         mapsQ:"All'Antico Vinaio, Via dei Neri, Firenze",
         text:"Florence's most famous sandwich shop, on Via dei Neri, where huge schiacciata sandwiches are stuffed with Tuscan cured meats, cheeses and spreads. The queue down the street is part of the experience — and it moves fast.",
         fact:"It grew from one tiny Florentine shopfront into a worldwide name — but the original on Via dei Neri is still the one to taste." },
@@ -332,13 +332,16 @@
     var grid = document.getElementById("grid");
     var places = CITIES[current].places;
     grid.innerHTML = places.map(function(p,idx){
+      var thumb = p.photo
+        ? '<span class="thumb" style="background-image:url(\''+p.photo+'\')"></span>'
+        : '<span class="thumb ph" data-wiki="'+encodeURIComponent(photoKey(p))+'">'+pinSVG()+'</span>';
       return '<button class="place" type="button" style="animation-delay:'+(idx*0.05)+'s" onclick="openP('+idx+')">'+
-               '<span class="thumb ph" data-wiki="'+encodeURIComponent(photoKey(p))+'">'+pinSVG()+'</span>'+
+               thumb+
                '<span class="cap"><span class="nm">'+p.name+'</span><span class="ct">'+(p.tag || CITIES[current].city)+'</span></span>'+
              '</button>';
     }).join("");
-    // lazy-load thumbnails from Wikipedia
-    places.forEach(function(p){ loadPhoto(photoKey(p)); });
+    // lazy-load thumbnails from Wikipedia (only for places without a local photo)
+    places.forEach(function(p){ if(!p.photo) loadPhoto(photoKey(p)); });
   }
 
   function loadPhoto(title){
@@ -390,6 +393,14 @@
     ph.style.backgroundImage = ""; ph.classList.add("ph"); ph.innerHTML = pinSVG();
     ph.classList.toggle("tall", !!p.photoTall);  // 'contain' fit for vertical subjects (e.g. David)
     credit.innerHTML = "";
+
+    if(p.photo){  // local photo takes precedence over Wikipedia
+      ph.style.backgroundImage = "url('"+p.photo+"')"; ph.classList.remove("ph"); ph.innerHTML="";
+      document.getElementById("ov").classList.add("open");
+      document.body.style.overflow = "hidden";
+      return;
+    }
+
     var key = photoKey(p);
     var cache = photoCache[key];
     function setPhoto(c2){
