@@ -184,15 +184,15 @@
       <div class="sect-lbl">Experiences</div>
       <div class="branches">
 
-        <!-- Ramo 1: Shopping → VIP Card Michelangelo (link interno) -->
-        <a class="branch d1" href="vip/">
+        <!-- Ramo 1: My Trusted Maisons → pagina hub con gli atelier partner -->
+        <a class="branch d1" href="maisons/">
           <span class="b-ico">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 21V9l9-6 9 6v12"/><path d="M9 21v-6h6v6"/><path d="M3 9h18"/></svg>
           </span>
           <span class="b-body">
-            <span class="b-lbl">Shopping</span>
-            <span class="b-title">Leather Atelier</span>
-            <span class="b-desc">A private welcome at a historic Florentine leather house.</span>
+            <span class="b-lbl">By personal introduction</span>
+            <span class="b-title">My Trusted Maisons</span>
+            <span class="b-desc">Florentine ateliers I introduce my guests to — leather and bespoke perfumery.</span>
           </span>
           <span class="b-arrow">→</span>
         </a>
@@ -290,9 +290,9 @@
     <section>
       <div class="sect-lbl">Scan</div>
       <div class="scan-row">
-        <button class="act" type="button" onclick="openQR('vip')">
+        <button class="act" type="button" onclick="openQR('maisons')">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3M20 14v.01M14 20h.01M20 20v.01M17 20h.01M20 17h.01"/></svg>
-          <span>VIP Card</span>
+          <span>Maisons</span>
         </button>
         <button class="act" type="button" onclick="openQR('profile')">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3M20 14v.01M14 20h.01M20 20v.01M17 20h.01M20 17h.01"/></svg>
@@ -341,8 +341,8 @@
   <div class="qr-overlay" id="qrOverlay" onclick="if(event.target===this)closeQR()">
     <div class="qr-modal">
       <div class="qm-lbl">Scan with your camera</div>
-      <div class="qm-title" id="qmTitle">VIP Card</div>
-      <div class="qm-img"><img id="qmImg" src="qr/qr_vipcard_bw.png" alt="QR code"></div>
+      <div class="qm-title" id="qmTitle">My Maisons</div>
+      <div class="qm-img"><img id="qmImg" src="qr/qr_maisons_bw.png" alt="QR code"></div>
       <p class="qm-desc" id="qmDesc">A personal welcome at a historic Florentine leather atelier.</p>
       <button class="qr-close" type="button" onclick="closeQR()">Close</button>
     </div>
@@ -350,7 +350,7 @@
 
   <script>
     var QR = {
-      vip:     {title:"VIP Card",   img:"qr/qr_vipcard_bw.png", desc:"A personal welcome at a historic Florentine leather atelier."},
+      maisons: {title:"My Maisons", img:"qr/qr_maisons_bw.png", desc:"The Florentine ateliers I introduce my guests to."},
       profile: {title:"My Profile", img:"qr/qr_profile_bw.png", desc:"Experiences, reviews and contacts — the full profile."}
     };
     function openQR(k){
